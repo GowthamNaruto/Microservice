@@ -1,0 +1,33 @@
+# K8s is extensible - we can add in our own custome objects.
+# This specifies the set of objects we want K8s to look at
+apiVersion: apps/v1
+
+# The type of object we want to create
+kind: Deployment
+
+#Config options for the object we are about to create
+metadata:
+  # When the pod is created, give it a name of 'posts'
+  name: posts
+
+# The exact attributes we want to apply to the objects we
+# about to create
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    # The exact attributes we want to apply to the objects we
+    # about to create
+    spec:
+      # Make a container with a name of 'posts'
+      containers:
+        - name: posts
+
+          # The exact image we want to use
+          image: gowtham1995/posts:0.0.1
+          imagePullPolicy: Never
