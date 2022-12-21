@@ -1,0 +1,84 @@
+# This config file is going to tell "Skaffold" how to manage
+# all the different sub-projects inside our cluster.
+
+apiVersion: skaffold/v2beta17
+kind: Config
+deploy:
+  kubectl:
+    # by adding in this manifest line, we are telling skaffold that we
+    # want it to watck all of these different "YAML" files
+    # Any time that we make changes to one of those file, skaffold is going to
+    # automatically reapply that config file to our Kubernetes cluster.
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    # By default, whenever skaffold makes a changes to one of our images or
+    # rebuilds an image, it's going to try to push it up to Docker Hub
+    # that is not actually required when we're using Skaffold.
+    # So disabling that behaviour by "push: false"
+    push: false
+
+  # This artifacts section is telling skaffold about something inside of our
+  # project that it needs to maintain.
+  # whenever something changes inside this directory, skaffold is going
+  # to try to take those changes and update our pod.
+  artifacts:
+    - image: gowtham1995/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+
+      # comments
+    - image: gowtham1995/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+
+      # event-bus
+    - image: gowtham1995/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+
+      # moderation
+    - image: gowtham1995/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+
+      # posts
+    - image: gowtham1995/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+
+      # query
+    - image: gowtham1995/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .

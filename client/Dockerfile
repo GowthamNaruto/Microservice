@@ -1,6 +1,9 @@
 # Specify a base image
 FROM node:16-alpine
 
+ENV CI=true
+ENV WDS_SOCKET_PORT=0
+
 # Set the working directory to './app' in the container.
 # All following commands will be issued relative to this dir.
 WORKDIR /app

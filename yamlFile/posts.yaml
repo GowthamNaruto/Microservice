@@ -13,14 +13,27 @@ metadata:
 # The exact attributes we want to apply to the objects we
 # about to create
 spec:
+  # Replicas is the number of pods that we want to create running
+  # some particular image
   replicas: 1
+
+  # In this case, we are telling the deployment that we
+  # wanted to find all the different pods with a lable of app 'posts'
+  # and those of the pods that it should be in incharge of
   selector:
     matchLabels:
       app: posts
+
+  # The template is where we specify the exact configuration of a pod
+  # that we want this deployment to create
   template:
+    # This is the configuration that is going to be applied
+    # to the pod that the deployment is going to make
     metadata:
+      # We want the pod to have a lable of 'app: posts'
       labels:
         app: posts
+
     # The exact attributes we want to apply to the objects we
     # about to create
     spec:
@@ -29,5 +42,5 @@ spec:
         - name: posts
 
           # The exact image we want to use
-          image: gowtham1995/posts:0.0.1
+          image: gowtham1995/posts
           imagePullPolicy: Never
