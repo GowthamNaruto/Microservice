@@ -147,11 +147,13 @@ docker run -p 8080:8080 gowtham1995/simpleweb
 Kubernetes(**K8s**) is a tool for running a bunch of different containers. When we make use of kubernetes, we’re going to give it some configuration to run and interact with each other.
 
 To make it simple, When we make use of kubernetes, we’re going to give it some configuration files, these configuration files are going to tell Kubernetes about the different containers that we want to run in our application. Kubernetes is then going to create these containers that are going to run our programs for us, and it’s going to handle communication or essentially network requests between all these different containers as well.
+
 So we can really imagine Kubernetes as a tool to run some different programs and make communication between those programs very easy and straightforward.
 
 ### Kubernetes Cluster
 
 A cluster is a set of different virtual machines. It can have as few as one virtual machine, or it can have many hundreds or thousands of virtual machines. All these different virtual machines we refer to as nodes, they are all managed by something called a **Maste**. Master is essentially a program that’s going to manage everything inside of our cluster, all the different programs that are running, all the different aspects of these virtual machines and many other things.
+
 When we tell kubernetes to run some programs for us it’ll take our program and then more or less randomly assign it to be executed by one of these nodes (a virtual machine). The big thing that Kubernetes does for us is give us the ability to just kind of arbitrarily send requests or communicate between these different services with some kind of third party thing that we are going to create. So in short, we can kind of imagine down here that we’re going to create something inside our cluster that we can just send requests to, and it will automatically figure out how to route requests off to the appropriate service that is running inside of our application.
 
 Kubernetes is also going to creating services like launching new copies and scaling the number of copies we’re running very easy and straightforward as well.
@@ -200,7 +202,7 @@ kubectl describe pod [pod_name]
 
 ```bash
 #  List all the running deployments.
-kubectl get deployments]
+kubectl get deployments
 
 #   To list all listening port in windows OS
 netstat -anb
@@ -209,7 +211,7 @@ netstat -anb
 kubectl describe deployment [depl_name]
 
 # Create a deployment out of a config file
-kubectl apply -f [config_file_name
+kubectl apply -f config_file_name
 
 #  to deploy multiple files in folder at once
 kubectl apply -f .
